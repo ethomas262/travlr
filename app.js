@@ -1,3 +1,4 @@
+//import dependencies
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -6,27 +7,40 @@ const logger = require('morgan');
 const handlebars = require('hbs');
 
 
-
+//import and define routers
 const indexRouter = require('./app_server/routes/index');
 const usersRouter = require('./app_server/routes/users');
+const travelRouter = require('./app_server/routes/travel');
+const apiRouter = require('./app_api/routes/index');
 
+
+//import database
+require('./app_api/Models/db');
+
+
+//start app
 const app = express();
 
 //register handlebars partials (http//www.npmjs.com/package/hbs)
 handlebars.registerPartials(__dirname + '/app_server/views/partials');
-app.set('view engine', 'hbs')
-// view engine setup
+
+
+// define app view engine setup
 app.set('views', path.join(__dirname, 'app_server','views'));
 app.set('view engine', 'hbs');
 
+//define app toolkit
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//define routes and controllers
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/travel', travelRouter);
+app.use('/api', apiRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
