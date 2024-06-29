@@ -11,7 +11,7 @@ describe('AddTripComponent', () => {
       imports: [AddTripComponent]
     })
     .compileComponents();
-
+    
     fixture = TestBed.createComponent(AddTripComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

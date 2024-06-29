@@ -6,10 +6,10 @@ const readLine = require('readline');
 
 
 const connect = () => {
-    setTimeout(()=> mongoose.connect(dbURI,{}), 1000);
+    setTimeout(() => mongoose.connect(dbURI, {}), 1000);
 }
 
-mongoose.connection.on('connected', ()=> {
+mongoose.connection.on('connected', () => {
     console.log(`Mongoose connected to ${dbURI}`);
 });
 
@@ -21,7 +21,7 @@ mongoose.connection.on('disconnected', () => {
     console.log('Mongoose disconnected');
 });
 
-if(process.platform === 'win32'){
+if (process.platform === 'win32') {
     const r1 = readLine.createInterface({
         input: process.stdin,
         output: process.stdout
@@ -33,7 +33,7 @@ if(process.platform === 'win32'){
 
 const gracefulShutdown = (msg) => {
     mongoose.connection.close(() => {
-    console.log(`Mongoose disconnected through ${msg}`);
+        console.log(`Mongoose disconnected through ${msg}`);
     });
 };
 

@@ -1,3 +1,6 @@
+#
+*.env
+
 # Logs
 logs
 *.log
@@ -59,6 +62,8 @@ typings/
 
 # next.js build output
 .next
+
+
 
 #filter out VScode Working Files
 .vscode/*
